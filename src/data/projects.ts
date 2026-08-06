@@ -83,6 +83,30 @@ export const projects: Project[] = [
     liveLabel: "Releases",
     githubLink: "https://github.com/Iwakura9/Unpoppable",
   },
+  {
+    name: "Portfólio",
+    imgSrc: "/projects/portfolio.svg",
+    description:
+      "Este próprio portfólio: construído com React e Vite para apresentar projetos, experiência acadêmica, tecnologias e atividade no GitHub.",
+    about:
+      "Portfólio pessoal orientado por dados, com troca de tema, rolagem suave e seções animadas. O contador de visitantes no rodapé usa um fingerprint gerado localmente no navegador, enviado a um endpoint serverless na Vercel que persiste os dados no Supabase.",
+    features: [
+      "Página inicial com apresentação, tecnologias, projetos, experiência acadêmica e atividade no GitHub",
+      "Páginas dedicadas para projetos, experiência e contato, com rotas de detalhe",
+      "Troca de tema com suporte a sistema, claro e escuro",
+      "Rolagem suave e revelações de seção animadas com Framer Motion",
+      "Contador de visitantes no rodapé com fingerprint gerado localmente",
+      "API serverless na Vercel com persistência em Supabase",
+    ],
+    techStack: [
+      projectTech.react,
+      projectTech.typescript,
+      projectTech.vite,
+      projectTech.tailwindcss,
+      projectTech.supabase,
+    ],
+    githubLink: "https://github.com/Iwakura9/Portfolio",
+  },
 ];
 
 // End of projects data

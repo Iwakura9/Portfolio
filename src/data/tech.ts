@@ -90,4 +90,9 @@ export const projectTech = {
   markdown: { name: "Markdown", icon: "/tech/markdown.svg" },
   neovim: { name: "Neovim", icon: "/tech/neovim.svg" },
   javascript: { name: "JavaScript", icon: "/tech/js.svg" },
+  react: { name: "React", icon: "/tech/react.svg" },
+  typescript: { name: "TypeScript", icon: "/tech/typescript.svg" },
+  tailwindcss: { name: "Tailwind CSS", icon: "/tech/tailwindcss.svg" },
+  vite: { name: "Vite", icon: "/tech/vite.svg" },
+  supabase: { name: "Supabase", icon: "/tech/supabase.svg" },
 } as const;
