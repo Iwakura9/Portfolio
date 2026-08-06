@@ -9,7 +9,7 @@ export const skills: TechItem[] = [
   { name: "C", icon: "/tech/c.svg" },
   { name: "C++", icon: "/tech/cpp.svg" },
   { name: "Java", icon: "/tech/java.svg" },
-  { name: "JavaScript", icon: "/tech/js.svg" },
+  { name: "TypeScript", icon: "/tech/typescript.svg" },
   { name: "SQL", icon: "/tech/database.svg" },
 ];
 
