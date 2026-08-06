@@ -55,6 +55,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       projectTech.c,
+      projectTech.python,
       projectTech.djangoRest,
       projectTech.sqlite,
     ],
@@ -77,7 +78,6 @@ export const projects: Project[] = [
     ],
     techStack: [
       projectTech.godot,
-      projectTech.gdscript,
     ],
     liveLink: "https://github.com/Iwakura9/Unpoppable/releases",
     liveLabel: "Releases",
