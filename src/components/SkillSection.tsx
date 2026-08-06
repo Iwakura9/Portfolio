@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SkillRow from "./helpers/SkillRow";
-import TechIcon from "./helpers/TechIcon";
+import ThemedIcon from "./helpers/ThemedIcon";
 import { skillRows } from "@/data/tech";
 import { LayoutGrid, List } from "lucide-react";
 
@@ -34,7 +34,7 @@ const SkillSection = () => {
                   key={skill.name}
                   className="bg-card inline-flex items-center gap-1.5 rounded-md border border-dashed px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
                 >
-                  <TechIcon item={skill} className="h-4 w-4" />
+                  <ThemedIcon item={skill} className="h-4 w-4" />
                   {skill.name}
                 </span>
               ))}

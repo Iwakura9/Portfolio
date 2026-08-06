@@ -1,13 +1,12 @@
 import { BadgeCheck, BookText, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
-import TechIcon from "./helpers/TechIcon";
+import ThemedIcon from "./helpers/ThemedIcon";
 import { skills } from "@/data/tech";
 import { socials } from "@/data/socials";
-import SocialIcon from "./helpers/SocialIcon";
 import { motion } from "framer-motion";
-import resumeUrl from "../../Curriculo.pdf?url";
-
+import { externalLinkProps } from "@/lib/links";
 import { containerVariants, itemVariants } from "@/lib/motionVariants";
+import resumeUrl from "@/assets/curriculo.pdf?url";
 
 const Hero = () => {
   return (
@@ -41,26 +40,15 @@ const Hero = () => {
               </span>
             </h1>
             <div className="flex items-start gap-2.5 sm:gap-3">
-              {socials.map(({ name, icon, darkIcon, href }) => (
+              {socials.map((social) => (
                 <a
-                  key={name}
-                  href={href}
-                  target={
-                    href.startsWith("mailto") || href.startsWith("tel")
-                      ? undefined
-                      : "_blank"
-                  }
-                  rel={
-                    href.startsWith("mailto") || href.startsWith("tel")
-                      ? undefined
-                      : "noreferrer"
-                  }
+                  key={social.name}
+                  href={social.href}
+                  {...externalLinkProps(social.href)}
                   className="border-0 hover:opacity-80 transition-opacity"
                 >
-                  <SocialIcon
-                    icon={icon}
-                    darkIcon={darkIcon}
-                    alt={name}
+                  <ThemedIcon
+                    item={social}
                     className="h-6 w-6 rounded p-0.5 sm:h-7 sm:w-7"
                   />
                 </a>
@@ -85,7 +73,7 @@ const Hero = () => {
                   key={skill.name}
                   className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-colors hover:border-foreground/30"
                 >
-                  <TechIcon
+                  <ThemedIcon
                     item={skill}
                     className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                   />

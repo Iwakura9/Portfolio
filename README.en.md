@@ -71,9 +71,13 @@ Important behavior:
 The visitor API:
 
 - accepts `POST` requests with `{ visitor_id }`
+- validates the `visitor_id` format before touching the database
 - inserts the visitor into Supabase with duplicate protection
 - reads the total visitor count from Supabase
 - returns the visitor's ordinal position plus the total count
+
+The ordinal position is counted in the database itself (via `count=exact` over
+earlier rows) rather than downloading the visitors table on every page load.
 
 If Supabase env vars are missing or the API fails, the UI falls back
 gracefully and keeps the footer quiet.
@@ -100,18 +104,49 @@ The visitor endpoint expects:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
+Both are read server-side only, in `api/visitors.ts`, and never reach the client
+bundle. Set them in the Vercel dashboard; locally, use a `.env` file (Git
+ignored). The Supabase `service_role` key grants full database access — never
+commit it or expose it through a `VITE_*` variable.
+
 ## Project Structure
 
-- `src/components/` reusable UI and section components
-- `src/pages/` route-level pages
-- `src/data/` portfolio content for projects, experience, socials, and tech
-- `src/lib/` shared utilities including fingerprint generation
-- `api/` Vercel serverless endpoints
-- `public/` static assets
+```
+api/                    Vercel serverless endpoints
+  visitors.ts           visitor counter (reads/writes Supabase)
+public/                 assets served as-is
+  assets/               photo, cover art, and player track
+  projects/             project cover images
+  social/               social network icons
+  tech/                 technology icons
+src/
+  assets/               bundler-imported files (resume)
+  components/           sections and UI components
+    helpers/            presentational utility components
+    ui/                 shadcn/ui primitives
+  data/                 portfolio content (projects, experience, etc.)
+  lib/                  shared utilities
+  pages/                route-level pages
+  providers/            context providers (theme)
+  App.tsx               home page composition
+  main.tsx              entry point and route definitions
+```
+
+## Conventions
+
+- Components use `PascalCase.tsx`; utilities and data use `camelCase.ts`.
+- Asset filenames are lowercase, with no spaces or accents.
+- All portfolio content lives in `src/data/*` — updating those files changes the
+  site without touching layout code.
+- Theme-aware icons go through `ThemedIcon`, which swaps variants via CSS
+  (`dark:`) instead of reading the theme in JavaScript, avoiding a flash on
+  first paint.
+- Project slugs are derived from the name by `slugify` (`src/lib/slug.ts`), used
+  both to build and to resolve the URLs.
 
 ## Notes
 
-- The app currently uses Vite rewrites so `/api/*` goes to the serverless
-  handler and all other routes fall back to `index.html`.
-- Most of the main page content is data-driven, so updating `src/data/*`
-  changes the public portfolio content without touching layout code.
+- `vercel.json` routes `/api/*` to the serverless functions and falls back to
+  `index.html` for every other route (SPA).
+- Both `package-lock.json` and `bun.lock` are committed. Stick to a single
+  package manager so the lockfiles don't drift.

@@ -1,7 +1,8 @@
 import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
-import TechIcon from "./helpers/TechIcon";
+import ThemedIcon from "./helpers/ThemedIcon";
 import type { Project } from "@/data/projects";
+import { slugify } from "@/lib/slug";
 import { Link } from "react-router-dom";
 
 const ProjectCard = ({
@@ -32,7 +33,7 @@ const ProjectCard = ({
 
       <div className="flex items-center gap-4 px-2 mt-4">
         {techStack.map((tech) => (
-          <TechIcon key={tech.name} item={tech} className="w-5 h-5" />
+          <ThemedIcon key={tech.name} item={tech} className="w-5 h-5" />
         ))}
       </div>
 
@@ -60,7 +61,7 @@ const ProjectCard = ({
           </a>
         </div>
         <p className="text-xs font-mono text-muted-foreground hover:text-foreground cursor-pointer transition-colors uppercase tracking-widest">
-          <Link to={`/projects/${name.toLowerCase().replace(/\s+/g, "-")}`}>
+          <Link to={`/projects/${slugify(name)}`}>
             Detalhes →
           </Link>
         </p>

@@ -17,8 +17,6 @@ const QuoteSection = () => {
 
   return (
     <>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap');`}</style>
-
       {/* Separator */}
       <div className="flex items-center justify-center gap-3 px-6 mt-8">
         <span className="flex-1 h-px bg-border/60" />
@@ -40,10 +38,7 @@ const QuoteSection = () => {
               transition={{ duration: 0.6 }}
               className="relative w-full pb-6"
             >
-              <p
-                className="text-muted-foreground italic text-base md:text-lg text-center"
-                style={{ fontFamily: "'Lora', serif" }}
-              >
+              <p className="text-center font-serif text-base italic text-muted-foreground md:text-lg">
                 "{current.text}"
               </p>
               {current.author && (
@@ -51,8 +46,7 @@ const QuoteSection = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
-                  className="absolute bottom-0 right-0 text-muted-foreground italic text-base"
-                  style={{ fontFamily: "'Lora', serif" }}
+                  className="absolute bottom-0 right-0 font-serif text-base italic text-muted-foreground"
                 >
                   — {current.author}
                 </motion.p>

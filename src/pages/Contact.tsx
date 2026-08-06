@@ -1,11 +1,11 @@
 import { FadeIn } from "@/components/helpers/FadeIn";
+import ThemedIcon from "@/components/helpers/ThemedIcon";
 import { socials } from "@/data/socials";
-import { useTheme } from "next-themes";
+import { externalLinkProps } from "@/lib/links";
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
-  const { resolvedTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -42,28 +42,12 @@ const Contact = () => {
             <FadeIn key={social.name} delay={0.2 + index * 0.05}>
               <a
                 href={social.href}
-                target={
-                  social.href.startsWith("mailto") ||
-                  social.href.startsWith("tel")
-                    ? undefined
-                    : "_blank"
-                }
-                rel={
-                  social.href.startsWith("mailto") ||
-                  social.href.startsWith("tel")
-                    ? undefined
-                    : "noreferrer"
-                }
+                {...externalLinkProps(social.href)}
                 className="group flex items-center justify-between rounded-xl border border-dashed border-border/80 bg-card p-4 transition-all hover:border-foreground/30 hover:bg-muted/20"
               >
                 <div className="flex items-center gap-4">
-                  <img
-                    src={
-                      resolvedTheme === "dark" && social.darkIcon
-                        ? social.darkIcon
-                        : social.icon
-                    }
-                    alt={social.name}
+                  <ThemedIcon
+                    item={social}
                     className="h-6 w-6 rounded-sm object-contain"
                   />
                   <span className="text-base font-light tracking-tight">

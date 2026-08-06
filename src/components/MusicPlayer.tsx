@@ -48,22 +48,29 @@ export const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  // O estado vem dos eventos do <audio>: `play()` é assíncrono e pode ser
+  // recusado pela política de autoplay, então assumir o sucesso dessincroniza.
   const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play().catch(() => setIsPlaying(false));
     } else {
-      audioRef.current.play();
+      audio.pause();
     }
-    setIsPlaying((prev) => !prev);
   };
 
   return (
     <div className="w-full flex justify-end pr-2">
+      {/* `preload="none"` evita baixar a faixa antes de o visitante dar play. */}
       <audio
         ref={audioRef}
-        src="/assets/03. Mountains.m4a"
+        src="/assets/mountains.m4a"
         loop
+        preload="none"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
         onEnded={() => setIsPlaying(false)}
       />
       
