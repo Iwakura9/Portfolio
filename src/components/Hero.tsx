@@ -77,7 +77,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            Graduando na UFC e membro do PET Computação, desenvolvendo projetos
+            Graduando na UFC, atualmente no sexto semestre, e membro do PET Computação. Desenvolvo projetos
             completos com{" "}
             <span className="inline items-center gap-2 align-middle">
               {skills.map((skill) => (
@@ -93,8 +93,7 @@ const Hero = () => {
                 </span>
               ))}
             </span>{" "}
-             e competidor de programação, com 2º lugar no Ceará no ICPC
-            Regionals 2024.
+             e compito em programação competitiva, com 2º lugar no Ceará no ICPC Regionals 2024.
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
