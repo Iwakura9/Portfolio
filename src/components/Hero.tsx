@@ -71,9 +71,9 @@ const Hero = () => {
 
         <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
           <h1 className="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight sm:text-[2.05rem] md:text-[2.15rem]">
-            Estudante de Ciência da Computação —{" "}
+            Estudante de Ciência da Computação {" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              desenvolvimento de software, Linux e computação aplicada.
+              Desenvolvimento de software e Linux.
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
@@ -93,7 +93,7 @@ const Hero = () => {
                 </span>
               ))}
             </span>{" "}
-            — e competidor de programação, com 2º lugar no Ceará no ICPC
+             e competidor de programação, com 2º lugar no Ceará no ICPC
             Regionals 2024.
           </p>
 
