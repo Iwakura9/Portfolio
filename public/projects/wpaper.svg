@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101416"/>
+      <stop offset="1" stop-color="#1b2424"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="108" y="94" width="984" height="487" rx="22" fill="#111719" stroke="#55766d" stroke-width="3"/>
+  <circle cx="145" cy="128" r="8" fill="#e06c75"/>
+  <circle cx="173" cy="128" r="8" fill="#e5c07b"/>
+  <circle cx="201" cy="128" r="8" fill="#98c379"/>
+  <path d="M109 160h982" stroke="#33423f" stroke-width="3"/>
+  <rect x="140" y="196" width="230" height="350" rx="12" fill="#172021"/>
+  <g fill="#82918d">
+    <rect x="170" y="230" width="152" height="12" rx="6"/>
+    <rect x="170" y="272" width="112" height="12" rx="6"/>
+    <rect x="170" y="314" width="135" height="12" rx="6"/>
+    <rect x="170" y="356" width="92" height="12" rx="6"/>
+  </g>
+  <g font-family="ui-monospace, monospace">
+    <text x="430" y="275" fill="#9fe3c3" font-size="82" font-weight="700">wpaper</text>
+    <text x="435" y="329" fill="#91a09c" font-size="24">notes · tasks · markdown</text>
+    <text x="435" y="420" fill="#6f827c" font-size="20">$ wpaper open today.md</text>
+    <rect x="435" y="452" width="18" height="30" fill="#9fe3c3"/>
+  </g>
+</svg>

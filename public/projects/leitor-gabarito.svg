@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#11151d"/>
+      <stop offset="1" stop-color="#1c2432"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="170" y="90" width="860" height="495" rx="24" fill="#f5f7fa"/>
+  <text x="220" y="158" fill="#1e293b" font-family="ui-sans-serif, sans-serif" font-size="32" font-weight="700">LEITOR DE GABARITO</text>
+  <text x="220" y="194" fill="#64748b" font-family="ui-monospace, monospace" font-size="18">OCI · PET Computação UFC</text>
+  <g fill="none" stroke="#cbd5e1" stroke-width="3">
+    <rect x="220" y="235" width="760" height="285" rx="16"/>
+    <path d="M220 292h760M350 235v285M720 235v285"/>
+  </g>
+  <g fill="#334155" font-family="ui-monospace, monospace" font-size="19">
+    <text x="250" y="272">QUESTÃO</text>
+    <text x="390" y="272">RESPOSTA</text>
+    <text x="760" y="272">STATUS</text>
+  </g>
+  <g fill="#94a3b8" font-family="ui-monospace, monospace" font-size="20">
+    <text x="270" y="337">01</text><text x="420" y="337">A</text>
+    <text x="270" y="393">02</text><text x="420" y="393">C</text>
+    <text x="270" y="449">03</text><text x="420" y="449">B</text>
+  </g>
+  <g fill="#22c55e">
+    <circle cx="800" cy="330" r="13"/><circle cx="800" cy="386" r="13"/><circle cx="800" cy="442" r="13"/>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#20304f"/>
+      <stop offset="1" stop-color="#121827"/>
+    </linearGradient>
+    <radialGradient id="balloon">
+      <stop stop-color="#ff8896"/>
+      <stop offset="1" stop-color="#d9485f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#sky)"/>
+  <circle cx="976" cy="116" r="62" fill="#f5d47c" opacity=".85"/>
+  <path d="M0 510C160 430 270 550 420 490s275-8 380 18 250-38 400-6v173H0z" fill="#1b382f"/>
+  <path d="M0 570c190-62 320 18 480-14s300 7 720-17v136H0z" fill="#102a25"/>
+  <g transform="translate(565 300)">
+    <ellipse cx="0" cy="0" rx="84" ry="105" fill="url(#balloon)"/>
+    <path d="M-18 98 0 129l18-31" fill="#bc354b"/>
+    <path d="M0 129v64" stroke="#f0d3b0" stroke-width="7"/>
+    <circle cx="-28" cy="-10" r="7" fill="#252635"/>
+    <circle cx="28" cy="-10" r="7" fill="#252635"/>
+    <path d="M-24 29q24 20 48 0" fill="none" stroke="#252635" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g fill="#273428" stroke="#92b66d" stroke-width="5">
+    <circle cx="260" cy="410" r="45"/><circle cx="920" cy="400" r="45"/>
+    <path d="M228 383l-28-35M292 383l28-35M888 373l-28-35M952 373l28-35"/>
+  </g>
+  <text x="600" y="100" text-anchor="middle" fill="#fff3df" font-family="ui-sans-serif, sans-serif" font-size="62" font-weight="800" letter-spacing="8">UNPOPPABLE</text>
+  <text x="600" y="146" text-anchor="middle" fill="#aab7ce" font-family="ui-monospace, monospace" font-size="20">SURVIVE THE WAVES</text>
+</svg>
