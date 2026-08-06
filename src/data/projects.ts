@@ -63,7 +63,7 @@ export const projects: Project[] = [
   },
   {
     name: "Unpoppable",
-    imgSrc: "/projects/unpoppable.svg",
+    imgSrc: "/projects/unpoppable.jpg",
     description:
       "Jogo top-down 2D de sobrevivência com hordas, progressão de dificuldade, novas armas e suporte para Linux e Windows.",
     about:
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   },
   {
     name: "Portfólio",
-    imgSrc: "/projects/portfolio.svg",
+    imgSrc: "/projects/portfolio.png",
     description:
       "Este próprio portfólio: construído com React e Vite para apresentar projetos, experiência acadêmica, tecnologias e atividade no GitHub.",
     about:
