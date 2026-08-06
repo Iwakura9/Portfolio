@@ -1,3 +1,5 @@
+🇧🇷 Português | 🇺🇸 [English](README.en.md)
+
 # Portfólio — Gabriel Cavalcante
 
 Portfólio pessoal construído com React e Vite para apresentar projetos,
@@ -16,95 +18,101 @@ experiência acadêmica, formação, tecnologias e atividade no GitHub.
 - Vercel serverless functions
 - Supabase for visitor storage
 
-## What It Includes
+## O Que Inclui
 
 - Página inicial com apresentação, tecnologias, projetos, experiência acadêmica,
   atividade no GitHub e conquistas
 - Páginas dedicadas para `projects`, `experiencia` e `contact`
 - Rotas de detalhes para projetos e experiências
-- Theme switching with system, light, and dark support
-- Smooth scrolling and motion-driven section reveals
-- Footer visitor tracking with a locally generated fingerprint
+- Troca de tema com suporte a sistema, claro e escuro
+- Rolagem suave e revelações de seção animadas
+- Contador de visitantes no rodapé com fingerprint gerado localmente
 
-## Routes
+## Rotas
 
-- `/` home
-- `/projects` all projects
-- `/projects/:slug` project detail
+- `/` início
+- `/projects` todos os projetos
+- `/projects/:slug` detalhe de projeto
 - `/experiencia` trajetória acadêmica
 - `/experiencia/:slug` detalhes de uma experiência
-- `/contact` contact page
+- `/contact` página de contato
 
-## Visitor Tracking
+## Rastreamento de Visitantes
 
-The footer visitor counter is handled in two parts:
+O contador de visitantes no rodapé funciona em duas partes:
 
-- The client creates a local fingerprint in `src/lib/fingerprint.ts`.
-- That fingerprint is sent to the serverless endpoint at `api/visitors.ts`.
+- O cliente cria um fingerprint local em `src/lib/fingerprint.ts`.
+- Esse fingerprint é enviado ao endpoint serverless em `api/visitors.ts`.
 
-### User-Agent Tracking
+### Rastreamento de User-Agent
 
-The **user-agent is explicitly part of the fingerprint input**. It is read from `navigator.userAgent`, combined with other browser/device signals, hashed locally, and stored in `localStorage` under `visitor_id`.
+O **user-agent faz parte explicitamente da entrada do fingerprint**. Ele é lido
+de `navigator.userAgent`, combinado com outros sinais de navegador/dispositivo,
+gerado como hash localmente e armazenado no `localStorage` sob `visitor_id`.
 
-The fingerprint inputs are:
+As entradas do fingerprint são:
 
 - `navigator.userAgent`
 - `navigator.language`
 - `screen.width x screen.height`
-- browser timezone from `Intl.DateTimeFormat().resolvedOptions().timeZone`
+- fuso horário do navegador via `Intl.DateTimeFormat().resolvedOptions().timeZone`
 - `navigator.hardwareConcurrency`
-- `navigator.deviceMemory` when available
-- a canvas-based hash generated in the browser
+- `navigator.deviceMemory` quando disponível
+- um hash baseado em canvas gerado no navegador
 
-Important behavior:
+Comportamento importante:
 
-- If `localStorage.visitor_id` already exists, the app reuses it.
-- The raw fingerprint inputs are not sent to the API.
-- Only the hashed `visitor_id` is posted to `/api/visitors`.
+- Se `localStorage.visitor_id` já existir, o app reaproveita esse valor.
+- As entradas brutas do fingerprint não são enviadas à API.
+- Apenas o `visitor_id` (já em hash) é enviado para `/api/visitors`.
 
-### Backend Behavior
+### Comportamento do Backend
 
-The visitor API:
+A API de visitantes:
 
-- accepts `POST` requests with `{ visitor_id }`
-- inserts the visitor into Supabase with duplicate protection
-- reads the total visitor count from Supabase
-- returns the visitor’s ordinal position plus the total count
+- aceita requisições `POST` com `{ visitor_id }`
+- insere o visitante no Supabase com proteção contra duplicidade
+- lê a contagem total de visitantes no Supabase
+- retorna a posição ordinal do visitante mais a contagem total
 
-If Supabase env vars are missing or the API fails, the UI falls back gracefully and keeps the footer quiet.
+Se as variáveis de ambiente do Supabase estiverem ausentes ou a API falhar, a
+interface degrada graciosamente e mantém o rodapé silencioso.
 
-## Local Development
+## Desenvolvimento Local
 
-1. Install dependencies:
+1. Instale as dependências:
    ```bash
    bun install
    ```
-2. Start the dev server:
+2. Inicie o servidor de desenvolvimento:
    ```bash
    bun run dev
    ```
-3. Build for production:
+3. Gere o build de produção:
    ```bash
    bun run build
    ```
 
-## Environment Variables
+## Variáveis de Ambiente
 
-The visitor endpoint expects:
+O endpoint de visitantes espera:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
-## Project Structure
+## Estrutura do Projeto
 
-- `src/components/` reusable UI and section components
-- `src/pages/` route-level pages
+- `src/components/` componentes de UI e de seção reutilizáveis
+- `src/pages/` páginas de rota
 - `src/data/` conteúdo do portfólio para projetos, experiências, redes e tecnologias
-- `src/lib/` shared utilities including fingerprint generation
-- `api/` Vercel serverless endpoints
-- `public/` static assets
+- `src/lib/` utilitários compartilhados, incluindo geração de fingerprint
+- `api/` endpoints serverless da Vercel
+- `public/` assets estáticos
 
-## Notes
+## Notas
 
-- The app currently uses Vite rewrites so `/api/*` goes to the serverless handler and all other routes fall back to `index.html`.
-- Most of the main page content is data-driven, so updating `src/data/*` changes the public portfolio content without touching layout code.
+- O app atualmente usa rewrites do Vite para que `/api/*` vá para o handler
+  serverless e as demais rotas caiam no fallback de `index.html`.
+- A maior parte do conteúdo da página principal é orientada por dados, então
+  atualizar `src/data/*` muda o conteúdo público do portfólio sem tocar no
+  código de layout.
