@@ -1,5 +1,5 @@
 import { memo } from "react";
-import TechIcon from "./TechIcon";
+import ThemedIcon from "./ThemedIcon";
 import type { TechItem } from "@/data/tech";
 
 const SkillRow = memo(({
@@ -20,7 +20,7 @@ const SkillRow = memo(({
           key={`${skill.name}-${i}`}
           className="inline-flex items-center gap-2 px-4 py-1 bg-card rounded-lg border border-dashed whitespace-nowrap"
         >
-          <TechIcon item={skill} className="w-4 h-4" />
+          <ThemedIcon item={skill} className="w-4 h-4" />
           {skill.name}
         </span>
       ))}

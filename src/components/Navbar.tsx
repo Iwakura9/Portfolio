@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 import { useTheme } from "next-themes";
 import { useState } from "react";
+import { site } from "@/data/site";
 
 const navItems = [
   { href: "/projects", label: "Projetos" },
@@ -31,7 +32,7 @@ const Navbar = () => {
           onClick={() => setIsOpen(false)}
           className="shrink-0 text-lg font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity"
         >
-          @Iwakura9
+          @{site.githubUser}
         </Link>
 
         {/* Desktop Nav */}

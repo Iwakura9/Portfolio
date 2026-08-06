@@ -3,16 +3,15 @@ import { projects } from "@/data/projects";
 import { ChevronLeft } from "lucide-react";
 import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
-import TechIcon from "@/components/helpers/TechIcon";
+import ThemedIcon from "@/components/helpers/ThemedIcon";
 import { useNavigate, useParams } from "react-router-dom";
 import { FadeIn } from "@/components/helpers/FadeIn";
+import { slugify } from "@/lib/slug";
 
 const ProjectDetail = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const project = projects.find(
-    (p) => p.name.toLowerCase().replace(/\s+/g, "-") === slug,
-  );
+  const project = projects.find((p) => slugify(p.name) === slug);
 
   if (!project) {
     return (
@@ -81,7 +80,7 @@ const ProjectDetail = () => {
                 key={tech.name}
                 className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-sm"
               >
-                <TechIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <ThemedIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 {tech.name}
               </span>
             ))}

@@ -71,9 +71,13 @@ Comportamento importante:
 A API de visitantes:
 
 - aceita requisições `POST` com `{ visitor_id }`
+- valida o formato do `visitor_id` antes de tocar no banco
 - insere o visitante no Supabase com proteção contra duplicidade
 - lê a contagem total de visitantes no Supabase
 - retorna a posição ordinal do visitante mais a contagem total
+
+A posição ordinal é contada no próprio banco (via `count=exact` sobre os
+registros anteriores), e não baixando a tabela de visitantes a cada acesso.
 
 Se as variáveis de ambiente do Supabase estiverem ausentes ou a API falhar, a
 interface degrada graciosamente e mantém o rodapé silencioso.
@@ -100,19 +104,49 @@ O endpoint de visitantes espera:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
+Ambas são lidas apenas no servidor, em `api/visitors.ts`, e nunca chegam ao
+bundle do cliente. Configure-as no painel da Vercel; localmente, use um `.env`
+(ignorado pelo Git). A chave `service_role` do Supabase concede acesso total ao
+banco — nunca a exponha em código versionado ou em variáveis `VITE_*`.
+
 ## Estrutura do Projeto
 
-- `src/components/` componentes de UI e de seção reutilizáveis
-- `src/pages/` páginas de rota
-- `src/data/` conteúdo do portfólio para projetos, experiências, redes e tecnologias
-- `src/lib/` utilitários compartilhados, incluindo geração de fingerprint
-- `api/` endpoints serverless da Vercel
-- `public/` assets estáticos
+```
+api/                    endpoints serverless da Vercel
+  visitors.ts           contagem de visitantes (lê/escreve no Supabase)
+public/                 assets servidos como estão
+  assets/               foto, capa e faixa do player
+  projects/             capas dos projetos
+  social/               ícones das redes sociais
+  tech/                 ícones de tecnologias
+src/
+  assets/               arquivos importados pelo bundler (currículo)
+  components/           seções e componentes de UI
+    helpers/            componentes utilitários de apresentação
+    ui/                 primitivos shadcn/ui
+  data/                 conteúdo do portfólio (projetos, experiências, etc.)
+  lib/                  utilitários compartilhados
+  pages/                páginas de rota
+  providers/            provedores de contexto (tema)
+  App.tsx               composição da página inicial
+  main.tsx              entrada e definição de rotas
+```
+
+## Convenções
+
+- Componentes em `PascalCase.tsx`; utilitários e dados em `camelCase.ts`.
+- Assets em minúsculas, sem espaços nem acentos.
+- Todo conteúdo do portfólio vive em `src/data/*` — atualizar esses arquivos
+  muda o site sem tocar no código de layout.
+- Ícones que mudam com o tema usam `ThemedIcon`, que troca a variante por CSS
+  (`dark:`) em vez de ler o tema em JavaScript, evitando piscar na primeira
+  pintura.
+- Slugs de projeto são derivados do nome por `slugify` (`src/lib/slug.ts`),
+  usada tanto para montar quanto para resolver as URLs.
 
 ## Notas
 
-- O app atualmente usa rewrites do Vite para que `/api/*` vá para o handler
-  serverless e as demais rotas caiam no fallback de `index.html`.
-- A maior parte do conteúdo da página principal é orientada por dados, então
-  atualizar `src/data/*` muda o conteúdo público do portfólio sem tocar no
-  código de layout.
+- `vercel.json` roteia `/api/*` para as funções serverless e faz fallback das
+  demais rotas para `index.html` (SPA).
+- O projeto tem `package-lock.json` e `bun.lock` versionados. Use apenas um
+  gerenciador para evitar que os lockfiles divirjam.

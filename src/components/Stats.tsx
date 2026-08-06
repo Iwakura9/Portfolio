@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
+import { site } from "@/data/site";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -11,20 +12,12 @@ type ContributionResponse = {
   contributions: Activity[];
 };
 
-const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const activityDateFormatter = new Intl.DateTimeFormat("pt-BR", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 const formatActivityDate = (date: string) => {
   const parsed = new Date(date);
@@ -32,7 +25,7 @@ const formatActivityDate = (date: string) => {
     return date;
   }
 
-  return `${parsed.getDate()} ${monthNames[parsed.getMonth()]} ${parsed.getFullYear()}`;
+  return activityDateFormatter.format(parsed);
 };
 
 const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => {
@@ -52,9 +45,10 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
     const el = scrollRef.current;
     if (!el) return;
 
-    setTimeout(() => {
+    // Abre o calendário já rolado até a data mais recente, após o layout.
+    const scrollToEnd = requestAnimationFrame(() => {
       el.scrollLeft = el.scrollWidth;
-    }, 10);
+    });
 
     const onWheel = (e: WheelEvent) => {
       if (e.deltaY !== 0) {
@@ -65,7 +59,10 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
     };
 
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    return () => {
+      cancelAnimationFrame(scrollToEnd);
+      el.removeEventListener("wheel", onWheel);
+    };
   }, [data]);
 
   useEffect(() => {
@@ -80,7 +77,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
         setError(null);
 
         const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/Iwakura9?y=${year}`,
+          `https://github-contributions-api.jogruber.de/v4/${site.githubUser}?y=${year}`,
           { signal: controller.signal },
         );
 
@@ -115,7 +112,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
       active = false;
       controller.abort();
     };
-  }, [year, currentYear]);
+  }, [year]);
 
   return (
     <section id="stats" className="w-full space-y-3">

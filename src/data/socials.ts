@@ -5,12 +5,14 @@ export interface SocialLink {
   href: string;
 }
 
+import { githubUrl } from "./site";
+
 export const socials: SocialLink[] = [
   {
     name: "GitHub",
     icon: "/social/github.svg",
     darkIcon: "/social/github-dark.svg",
-    href: "https://github.com/Iwakura9",
+    href: githubUrl,
   },
   {
     name: "Linkedin",
