@@ -97,7 +97,7 @@ export const projects: Project[] = [
   {
     slug: "unpoppable",
     name: { pt: "Unpoppable", en: "Unpoppable" },
-    imgSrc: "/projects/unpoppable.jpg",
+    imgSrc: "/projects/unpoppable_demo.png",
     description: {
       pt: "Jogo top-down 2D de sobrevivência com hordas, progressão de dificuldade, novas armas e suporte para Linux e Windows.",
       en: "2D top-down survival game with hordes, escalating difficulty, new weapons and support for Linux and Windows.",
