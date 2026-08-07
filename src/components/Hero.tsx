@@ -6,7 +6,7 @@ import { socials } from "@/data/socials";
 import { motion } from "framer-motion";
 import { externalLinkProps } from "@/lib/links";
 import { containerVariants, itemVariants } from "@/lib/motionVariants";
-import resumeUrl from "@/assets/curriculo.pdf?url";
+import resumeUrl from "@/assets/Curriculo.pdf?url";
 import { useI18n } from "@/i18n/useI18n";
 
 const Hero = () => {
