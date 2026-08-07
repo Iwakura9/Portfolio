@@ -7,8 +7,11 @@ import { motion } from "framer-motion";
 import { externalLinkProps } from "@/lib/links";
 import { containerVariants, itemVariants } from "@/lib/motionVariants";
 import resumeUrl from "@/assets/curriculo.pdf?url";
+import { useI18n } from "@/i18n/useI18n";
 
 const Hero = () => {
+  const { t, pick } = useI18n();
+
   return (
     <section
       className="flex flex-col justify-center pt-32 pb-20 sm:pt-22 sm:pb-12"
@@ -28,7 +31,7 @@ const Hero = () => {
             {/* avatar */}
             <img
               src={`${import.meta.env.BASE_URL}assets/me.jpeg`}
-              alt="Avatar de Gabriel de Sousa Cavalcante"
+              alt={t.hero.avatarAlt}
               className="block h-35 w-35 shrink-0 rounded-full border-2 border-border object-cover object-center p-1 shadow-sm sm:h-40 sm:w-40"
             />
           </div>
@@ -42,13 +45,14 @@ const Hero = () => {
             <div className="flex items-start gap-2.5 sm:gap-3">
               {socials.map((social) => (
                 <a
-                  key={social.name}
+                  key={social.href}
                   href={social.href}
                   {...externalLinkProps(social.href)}
                   className="border-0 hover:opacity-80 transition-opacity"
                 >
                   <ThemedIcon
                     item={social}
+                    alt={pick(social.name)}
                     className="h-6 w-6 rounded p-0.5 sm:h-7 sm:w-7"
                   />
                 </a>
@@ -59,14 +63,13 @@ const Hero = () => {
 
         <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
           <h1 className="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight sm:text-[2.05rem] md:text-[2.15rem]">
-            Estudante de Ciência da Computação {" "}
+            {t.hero.headline} {" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              Desenvolvimento de software e Linux.
+              {t.hero.headlineAccent}
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            Graduando na UFC, atualmente no sexto semestre, e membro do PET Computação. Desenvolvo projetos
-            completos com{" "}
+            {t.hero.bioBefore}{" "}
             <span className="inline items-center gap-2 align-middle">
               {skills.map((skill) => (
                 <span
@@ -75,13 +78,14 @@ const Hero = () => {
                 >
                   <ThemedIcon
                     item={skill}
+                    alt={skill.name}
                     className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                   />
                   {skill.name}
                 </span>
               ))}
             </span>{" "}
-             e compito em programação competitiva, com 2º lugar no Ceará no ICPC Regionals 2024.
+             {t.hero.bioAfter}
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
@@ -89,7 +93,7 @@ const Hero = () => {
               <Button
                 size="lg"
               >
-                Entre em contato
+                {t.hero.contact}
                 <ChevronRight strokeWidth={2.25} />
               </Button>
             </a>
@@ -103,7 +107,7 @@ const Hero = () => {
                 size="lg"
                 className="bg-card text-foreground border-dashed cursor-pointer"
               >
-                Currículo
+                {t.hero.resume}
                 <BookText />
               </Button>
             </a>

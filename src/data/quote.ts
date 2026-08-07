@@ -1,23 +1,37 @@
+import type { Localized } from "@/i18n/types";
+
 export interface Quote {
-  text: string;
+  text: Localized<string>;
   author: string;
 }
 
 export const quotes: Quote[] = [
   {
-    text: "2º lugar no Ceará na Maratona Brasileira de Programação.",
+    text: {
+      pt: "2º lugar no Ceará na Maratona Brasileira de Programação.",
+      en: "2nd place in Ceará at the Brazilian Programming Marathon.",
+    },
     author: "ICPC Regionals 2024",
   },
   {
-    text: "Medalhista da Olimpíada Brasileira de Matemática das Escolas Públicas.",
+    text: {
+      pt: "Medalhista da Olimpíada Brasileira de Matemática das Escolas Públicas.",
+      en: "Medalist at the Brazilian Mathematical Olympiad for Public Schools.",
+    },
     author: "OBMEP 2022",
   },
   {
-    text: "Medalhista da Olimpíada Brasileira de Raciocínio Lógico.",
+    text: {
+      pt: "Medalhista da Olimpíada Brasileira de Raciocínio Lógico.",
+      en: "Medalist at the Brazilian Logical Reasoning Olympiad.",
+    },
     author: "OBRL 2022",
   },
   {
-    text: "Menção honrosa na Olimpíada Cearense de Informática.",
+    text: {
+      pt: "Menção honrosa na Olimpíada Cearense de Informática.",
+      en: "Honorable mention at the Ceará Informatics Olympiad.",
+    },
     author: "OCI 2022",
   },
 ];

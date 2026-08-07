@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Pause } from "lucide-react";
+import { useI18n } from "@/i18n/useI18n";
 
 const MusicBars = () => (
   <div className="flex items-end gap-[2px] h-3 w-4">
@@ -47,6 +48,7 @@ const MusicIcon = ({
 export const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const { t } = useI18n();
 
   // O estado vem dos eventos do <audio>: `play()` é assíncrono e pode ser
   // recusado pela política de autoplay, então assumir o sucesso dessincroniza.
@@ -99,7 +101,7 @@ export const MusicPlayer = () => {
         <button
           onClick={togglePlay}
           className="ml-2 p-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground transition-all active:scale-90"
-          aria-label={isPlaying ? "Pause" : "Play"}
+          aria-label={isPlaying ? t.player.pause : t.player.play}
         >
           {isPlaying ? (
             <Pause size={18} className="fill-current" />

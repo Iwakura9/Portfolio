@@ -2,8 +2,10 @@ import { getOrCreateFingerprint } from "@/lib/fingerprint";
 import { UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { useI18n } from "@/i18n/useI18n";
 
 const VisitorCount = () => {
+  const { t } = useI18n();
   const [count, setCount] = useState<number | null>(null);
   const [total, setTotal] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -68,14 +70,16 @@ const VisitorCount = () => {
         <div className="flex w-full items-center justify-center gap-2 sm:justify-start">
           <UserRound size={17} className="shrink-0 text-muted-foreground" />
           <p className="flex min-w-0 flex-wrap items-center justify-center gap-x-1 gap-y-0.5 text-center text-base leading-tight text-muted-foreground sm:justify-start sm:text-left">
-            <span>Você é o visitante nº</span>
+            <span>{t.visitors.before}</span>
             <span className="whitespace-nowrap text-lg font-light leading-none text-foreground tabular-nums sm:text-xl">
               {count}
             </span>
             <span className="whitespace-nowrap text-sm font-light leading-none text-muted-foreground tabular-nums sm:text-base">
               {total !== null ? `/ ${total}` : ""}
             </span>
-            <span className="whitespace-nowrap text-base">visitantes</span>
+            <span className="whitespace-nowrap text-base">
+              {t.visitors.after}
+            </span>
           </p>
         </div>
       )}

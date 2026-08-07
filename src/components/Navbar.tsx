@@ -1,26 +1,20 @@
-import { Menu, Moon, Sun, TvMinimal, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
-import { useTheme } from "next-themes";
 import { useState } from "react";
 import { site } from "@/data/site";
-
-const navItems = [
-  { href: "/projects", label: "Projetos" },
-  { href: "/experiencia", label: "Experiência" },
-];
-
-const themes = [
-  { theme: "system", icon: TvMinimal },
-  { theme: "light", icon: Sun },
-  { theme: "dark", icon: Moon },
-];
+import { useI18n } from "@/i18n/useI18n";
+import ThemeSwitch from "./helpers/ThemeSwitch";
+import LanguageSwitch from "./helpers/LanguageSwitch";
 
 const Navbar = () => {
   const location = useLocation();
-  const { theme, setTheme } = useTheme();
-  const currentTheme = theme ?? "system";
+  const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    { href: "/projects", label: t.nav.projects },
+    { href: "/experiencia", label: t.nav.experience },
+  ];
 
   return (
     <nav
@@ -36,18 +30,18 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden sm:flex flex-1 items-center justify-end gap-1 pr-3">
+        <div className="hidden sm:flex flex-1 items-center justify-end gap-1 pr-2">
           {navItems.map(({ href, label }) => {
             const isActive = location.pathname.startsWith(href);
 
-            const itemClass = `rounded-md px-3 py-2 text-base font-light transition-colors ${
+            const itemClass = `rounded-md px-2.5 py-2 text-base font-light transition-colors ${
               isActive
                 ? "!text-foreground"
                 : "text-muted-foreground hover:text-foreground"
             }`;
 
             return (
-              <Link key={label} to={href} className={itemClass}>
+              <Link key={href} to={href} className={itemClass}>
                 {label}
               </Link>
             );
@@ -55,34 +49,20 @@ const Navbar = () => {
         </div>
 
         <div
-          className="hidden sm:block h-6 w-px shrink-0 bg-border/80 mx-2"
+          className="hidden sm:block h-6 w-px shrink-0 bg-border/80 mx-1.5"
           aria-hidden="true"
         />
 
-        <div className="hidden sm:flex shrink-0 items-center">
-          <Tabs
-            value={currentTheme}
-            onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
-          >
-            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-1 p-1">
-              {themes.map(({ theme, icon: Icon }) => (
-                <TabsTrigger
-                  key={theme}
-                  value={theme}
-                  className="h-6 w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
-                >
-                  <Icon className="size-[16px]" />
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+        <div className="hidden sm:flex shrink-0 items-center gap-2">
+          <LanguageSwitch />
+          <ThemeSwitch />
         </div>
 
         {/* Mobile Toggle Button */}
         <button
           className="relative w-9 h-9 flex sm:hidden items-center justify-center p-2 text-muted-foreground hover:text-foreground rounded-md hover:bg-muted/50 transition-colors duration-200"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Alternar menu"
+          aria-label={t.nav.toggleMenu}
         >
           <Menu
             className={`absolute transition-all duration-200 ease-in-out ${
@@ -117,7 +97,7 @@ const Navbar = () => {
             }`;
             return (
               <Link
-                key={label}
+                key={href}
                 to={href}
                 onClick={() => setIsOpen(false)}
                 className={itemClass}
@@ -132,24 +112,16 @@ const Navbar = () => {
 
         <div className="flex items-center justify-between px-1">
           <span className="text-base font-light tracking-tight text-muted-foreground">
-            Tema
+            {t.nav.language}
           </span>
-          <Tabs
-            value={currentTheme}
-            onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
-          >
-            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-1 p-1">
-              {themes.map(({ theme, icon: Icon }) => (
-                <TabsTrigger
-                  key={theme}
-                  value={theme}
-                  className="h-6 w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
-                >
-                  <Icon className="size-[16px]" />
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          <LanguageSwitch />
+        </div>
+
+        <div className="flex items-center justify-between px-1">
+          <span className="text-base font-light tracking-tight text-muted-foreground">
+            {t.nav.theme}
+          </span>
+          <ThemeSwitch />
         </div>
       </div>
     </nav>

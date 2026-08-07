@@ -6,20 +6,23 @@ import { BiLink } from "react-icons/bi";
 import ThemedIcon from "@/components/helpers/ThemedIcon";
 import { useNavigate, useParams } from "react-router-dom";
 import { FadeIn } from "@/components/helpers/FadeIn";
-import { slugify } from "@/lib/slug";
+import { useI18n } from "@/i18n/useI18n";
 
 const ProjectDetail = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const project = projects.find((p) => slugify(p.name) === slug);
+  const { t, pick } = useI18n();
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return (
       <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
-        Projeto não encontrado
+        {t.projects.notFound}
       </div>
     );
   }
+
+  const projectName = pick(project.name);
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6">
@@ -28,16 +31,16 @@ const ProjectDetail = () => {
           onClick={() => navigate("/projects")}
           className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
-          <ChevronLeft size={20} strokeWidth={2.25} /> Voltar aos projetos
+          <ChevronLeft size={20} strokeWidth={2.25} /> {t.projects.back}
         </button>
       </FadeIn>
       <div className="flex flex-col gap-6">
         <FadeIn delay={0.1}>
           <h1 className="text-2xl font-light tracking-tight sm:text-4xl">
-            {project.name}
+            {projectName}
           </h1>
           <p className="mt-4 text-lg font-light text-muted-foreground sm:text-xl">
-            {project.description}
+            {pick(project.description)}
           </p>
         </FadeIn>
         <FadeIn delay={0.15}>
@@ -49,14 +52,16 @@ const ProjectDetail = () => {
                 size="lg"
               >
                 <LuGithub className="w-4 h-4" />
-                Ver código
+                {t.projects.viewCode}
               </Button>
             </a>
             {project.liveLink ? (
               <a href={project.liveLink} target="_blank" rel="noreferrer">
                 <Button size="lg">
                   <BiLink className="w-4 h-4" />
-                  {project.liveLabel ?? "Abrir projeto"}
+                  {project.liveLabel
+                    ? pick(project.liveLabel)
+                    : t.projects.openProject}
                 </Button>
               </a>
             ) : null}
@@ -66,13 +71,13 @@ const ProjectDetail = () => {
           <img
             className="rounded-lg border border-border border-dashed"
             src={project.imgSrc}
-            alt={project.name}
+            alt={projectName}
             loading="lazy"
           />
         </FadeIn>
         <FadeIn delay={0.25}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
-            Tecnologias utilizadas
+            {t.projects.techUsed}
           </h2>
           <div className="flex flex-wrap items-center gap-2 mt-2">
             {project.techStack.map((tech) => (
@@ -80,7 +85,11 @@ const ProjectDetail = () => {
                 key={tech.name}
                 className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-sm"
               >
-                <ThemedIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <ThemedIcon
+                  item={tech}
+                  alt={tech.name}
+                  className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                />
                 {tech.name}
               </span>
             ))}
@@ -88,16 +97,18 @@ const ProjectDetail = () => {
         </FadeIn>
         <FadeIn delay={0.3}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
-            Sobre o projeto
+            {t.projects.about}
           </h2>
-          <p className="text-muted-foreground font-light">{project.about}</p>
+          <p className="text-muted-foreground font-light">
+            {pick(project.about)}
+          </p>
         </FadeIn>
         <FadeIn delay={0.35}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
-            Principais recursos
+            {t.projects.features}
           </h2>
           <ul className="list-disc pl-5 space-y-2 text-muted-foreground font-light ">
-            {project.features.map((feature, idx) => (
+            {pick(project.features).map((feature, idx) => (
               <li key={idx}>{feature}</li>
             ))}
           </ul>
