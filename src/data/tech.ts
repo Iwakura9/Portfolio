@@ -95,6 +95,7 @@ export const projectTech = {
   gdscript: { name: "GDScript", icon: "/tech/godot.svg" },
   linux: { name: "Linux", icon: "/tech/linux-tux.svg" },
   markdown: { name: "Markdown", icon: "/tech/markdown.svg" },
+  latex: { name: "LaTeX", icon: "/tech/latex.svg" },
   neovim: { name: "Neovim", icon: "/tech/neovim.svg" },
   javascript: { name: "JavaScript", icon: "/tech/js.svg" },
   react: { name: "React", icon: "/tech/react.svg" },

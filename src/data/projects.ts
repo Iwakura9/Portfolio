@@ -127,7 +127,7 @@ export const projects: Project[] = [
         "Full scientific paper available as a PDF download",
       ],
     },
-    techStack: [projectTech.python],
+    techStack: [projectTech.python, projectTech.latex],
     liveLink: wineQualityArticleUrl,
     liveLabel: { pt: "Baixar Artigo (PDF)", en: "Download Paper (PDF)" },
   },
