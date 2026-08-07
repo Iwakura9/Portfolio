@@ -60,14 +60,16 @@ const ProjectCard = ({
               <BiLink className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
             </a>
           ) : null}
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={t.a11y.viewSource(projectName)}
-          >
-            <LuGithub className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-          </a>
+          {githubLink ? (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t.a11y.viewSource(projectName)}
+            >
+              <LuGithub className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+            </a>
+          ) : null}
         </div>
         <p className="text-xs font-mono text-muted-foreground hover:text-foreground cursor-pointer transition-colors uppercase tracking-widest">
           <Link to={`/projects/${slug}`}>{t.projects.details}</Link>

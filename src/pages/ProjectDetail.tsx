@@ -45,16 +45,18 @@ const ProjectDetail = () => {
         </FadeIn>
         <FadeIn delay={0.15}>
           <div className="flex flex-wrap gap-3 sm:gap-4">
-            <a href={project.githubLink} target="_blank" rel="noreferrer">
-              <Button
-                variant="outline"
-                className="border border-border border-dashed"
-                size="lg"
-              >
-                <LuGithub className="w-4 h-4" />
-                {t.projects.viewCode}
-              </Button>
-            </a>
+            {project.githubLink ? (
+              <a href={project.githubLink} target="_blank" rel="noreferrer">
+                <Button
+                  variant="outline"
+                  className="border border-border border-dashed"
+                  size="lg"
+                >
+                  <LuGithub className="w-4 h-4" />
+                  {t.projects.viewCode}
+                </Button>
+              </a>
+            ) : null}
             {project.liveLink ? (
               <a href={project.liveLink} target="_blank" rel="noreferrer">
                 <Button size="lg">

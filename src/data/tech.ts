@@ -84,6 +84,7 @@ export const skillRows: {
 
 export const projectTech = {
   python: { name: "Python", icon: "/tech/python.svg" },
+  java: { name: "Java", icon: "/tech/java.svg" },
   c: { name: "C", icon: "/tech/c.svg" },
   cpp: { name: "C++", icon: "/tech/cpp.svg" },
   sql: { name: "SQL", icon: "/tech/database.svg" },
