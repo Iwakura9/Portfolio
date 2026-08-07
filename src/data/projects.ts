@@ -1,6 +1,7 @@
 import { projectTech } from "@/data/tech";
 import type { TechItem } from "@/data/tech";
 import type { Localized } from "@/i18n/types";
+import wineQualityArticleUrl from "@/assets/wine-quality-artigo.pdf?url";
 
 export interface Project {
   /** Estável e independente de idioma: define a URL em `/projects/:slug`. */
@@ -201,6 +202,42 @@ export const projects: Project[] = [
       ],
     },
     techStack: [projectTech.java],
+  },
+  {
+    slug: "wine-quality-ml",
+    name: { pt: "Wine Quality ML", en: "Wine Quality ML" },
+    imgSrc: "/projects/wine-quality-ml.png",
+    description: {
+      pt: "Comparação de modelos de Machine Learning implementados do zero (sem scikit-learn) para prever a qualidade de vinhos, com artigo científico completo em PDF.",
+      en: "Comparison of Machine Learning models implemented from scratch (no scikit-learn) to predict wine quality, with a full scientific paper in PDF.",
+    },
+    about: {
+      pt: "Wine Quality ML compara modelos de aprendizado de máquina no dataset Wine Quality (Cortez et al., 2009), usando os arquivos de vinho tinto e vinho branco da UCI. O diferencial do projeto é que nenhum modelo é importado de scikit-learn ou biblioteca equivalente: todos os algoritmos foram reescritos manualmente usando apenas numpy para álgebra linear e cálculos vetorizados, e pandas para leitura e manipulação dos dados. O problema foi modelado de duas formas: regressão, prevendo diretamente a nota de qualidade, e classificação em três classes (ruim, mediano, bom). Foram implementados três modelos: uma Random Forest com árvores CART construídas manualmente, amostragem bootstrap e seleção aleatória de features em cada divisão; uma Softmax Regression treinada por gradiente descendente com softmax estável, regularização L2 e pesos balanceados por classe; e um K-Nearest Neighbors para regressão e classificação, com o valor de k escolhido por validação cruzada manual. O pipeline completo cobre leitura e limpeza dos dados, divisão treino/teste estratificada, padronização das features refeita a cada fold da validação cruzada, treinamento dos modelos finais e cálculo manual de métricas como RMSE, MAE, R², acurácia, F1 macro e AUC-ROC macro. Na execução validada, a Random Forest manual obteve o melhor RMSE entre os regressores (0.6235) e o melhor AUC-ROC macro entre eles (0.8582), mantendo resultados consistentes (RMSE médio de 0.6225 ± 0.0023) em cinco divisões treino/teste repetidas. Todo o processo, as decisões de modelagem e os resultados estão documentados no artigo científico em PDF disponível para download.",
+      en: "Wine Quality ML compares machine learning models on the Wine Quality dataset (Cortez et al., 2009), using the UCI red and white wine files. The key constraint of the project is that no model is imported from scikit-learn or an equivalent library: every algorithm was rewritten manually using only numpy for linear algebra and vectorized computation, and pandas for reading and handling the data. The problem was modeled in two ways: regression, predicting the quality score directly, and three-class classification (poor, average, good). Three models were implemented: a Random Forest built from manual CART trees with bootstrap sampling and random feature selection at each split; a Softmax Regression trained with gradient descent, numerically stable softmax, L2 regularization and class-balanced weights; and a K-Nearest Neighbors model for both regression and classification, with k chosen via manual cross-validation. The full pipeline covers data reading and cleaning, stratified train/test splitting, feature standardization redone within each cross-validation fold, training of the final models, and manual computation of metrics such as RMSE, MAE, R², accuracy, macro F1 and macro AUC-ROC. In the validated run, the manual Random Forest achieved the best RMSE among regressors (0.6235) and the best macro AUC-ROC among them (0.8582), staying consistent (mean RMSE of 0.6225 ± 0.0023) across five repeated train/test splits. The full process, modeling decisions and results are documented in the scientific paper available for download as a PDF.",
+    },
+    features: {
+      pt: [
+        "Três modelos de ML implementados manualmente, sem scikit-learn: Random Forest, Softmax Regression e KNN",
+        "Duas formulações do problema: regressão da nota de qualidade e classificação em três classes",
+        "Validação cruzada manual para escolha de hiperparâmetros",
+        "Padronização de features refeita dentro de cada fold, evitando vazamento de dados",
+        "Métricas calculadas manualmente: RMSE, MAE, R², acurácia, F1 macro e AUC-ROC macro",
+        "Repetição dos modelos finais em cinco divisões treino/teste para média e intervalo de confiança de 95%",
+        "Artigo científico completo em PDF disponível para download",
+      ],
+      en: [
+        "Three ML models implemented from scratch, no scikit-learn: Random Forest, Softmax Regression and KNN",
+        "Two problem formulations: regression of the quality score and three-class classification",
+        "Manual cross-validation for hyperparameter selection",
+        "Feature standardization redone within each fold to avoid data leakage",
+        "Manually computed metrics: RMSE, MAE, R², accuracy, macro F1 and macro AUC-ROC",
+        "Final models repeated across five train/test splits for mean and 95% confidence interval",
+        "Full scientific paper available as a PDF download",
+      ],
+    },
+    techStack: [projectTech.python],
+    liveLink: wineQualityArticleUrl,
+    liveLabel: { pt: "Baixar Artigo (PDF)", en: "Download Paper (PDF)" },
   },
 ];
 
