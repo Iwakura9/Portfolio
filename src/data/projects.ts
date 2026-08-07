@@ -239,6 +239,37 @@ export const projects: Project[] = [
     liveLink: wineQualityArticleUrl,
     liveLabel: { pt: "Baixar Artigo (PDF)", en: "Download Paper (PDF)" },
   },
+  {
+    slug: "raytracer",
+    name: { pt: "Raytracer em C", en: "Raytracer in C" },
+    imgSrc: "/projects/raytracer.jpg",
+    description: {
+      pt: "Raytracer construído do zero em C/C++ seguindo o livro Ray Tracing in One Weekend, evoluído para um renderizador interativo com OpenGL.",
+      en: "Raytracer built from scratch in C/C++ following the Ray Tracing in One Weekend book, evolved into an interactive OpenGL renderer.",
+    },
+    about: {
+      pt: "Projeto de raytracing desenvolvido a partir do livro Ray Tracing in One Weekend, começando por um núcleo simples em C/C++ com câmera, esferas e materiais básicos. A partir dessa base, o projeto evoluiu para uma versão interativa que usa OpenGL (via GLFW e GLEW) e ImGui para renderizar e ajustar a cena em tempo real, em vez de gerar apenas uma imagem estática ao final da execução. A versão final suporta múltiplas primitivas geométricas (esferas, cones, cilindros e malhas de triângulos), materiais, texturas, transformações de objetos e fontes de luz na cena.",
+      en: "A ray tracing project built from the Ray Tracing in One Weekend book, starting with a simple C/C++ core with a camera, spheres and basic materials. From that base, the project evolved into an interactive version using OpenGL (via GLFW and GLEW) and ImGui to render and tweak the scene in real time, instead of just producing a static image at the end of execution. The final version supports multiple geometric primitives (spheres, cones, cylinders and triangle meshes), materials, textures, object transforms and scene light sources.",
+    },
+    features: {
+      pt: [
+        "Núcleo de raytracing em C/C++ baseado no livro Ray Tracing in One Weekend",
+        "Renderizador interativo em OpenGL com GLFW, GLEW e ImGui",
+        "Suporte a múltiplas primitivas: esferas, cones, cilindros e malhas de triângulos",
+        "Materiais, texturas e transformações de objetos na cena",
+        "Fontes de luz configuráveis na cena",
+      ],
+      en: [
+        "C/C++ ray tracing core based on the Ray Tracing in One Weekend book",
+        "Interactive OpenGL renderer with GLFW, GLEW and ImGui",
+        "Support for multiple primitives: spheres, cones, cylinders and triangle meshes",
+        "Materials, textures and object transforms in the scene",
+        "Configurable light sources in the scene",
+      ],
+    },
+    techStack: [projectTech.cpp, projectTech.c],
+    githubLink: "https://github.com/Iwakura9/Raytracer",
+  },
 ];
 
 // End of projects data
