@@ -2,16 +2,18 @@ import { experiences } from "@/data/experience";
 import { ChevronLeft, MapPin, Tag } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FadeIn } from "@/components/helpers/FadeIn";
+import { useI18n } from "@/i18n/useI18n";
 
 const ExperienceDetail = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
+  const { t, pick } = useI18n();
   const experience = experiences.find((item) => item.slug === slug);
 
   if (!experience) {
     return (
       <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
-        Experiência não encontrada
+        {t.experience.notFound}
       </div>
     );
   }
@@ -23,7 +25,7 @@ const ExperienceDetail = () => {
           onClick={() => navigate("/experiencia")}
           className="flex w-fit cursor-pointer items-center gap-3 text-md font-light tracking-tight text-muted-foreground duration-200 hover:text-foreground"
         >
-          <ChevronLeft size={20} strokeWidth={2.25} /> Voltar à trajetória
+          <ChevronLeft size={20} strokeWidth={2.25} /> {t.experience.back}
         </button>
       </FadeIn>
 
@@ -31,29 +33,29 @@ const ExperienceDetail = () => {
         <FadeIn delay={0.1}>
           <div className="flex items-center justify-between gap-3">
             <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              {experience.period}
+              {pick(experience.period)}
             </span>
             <span className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
               <MapPin size={12} />
-              {experience.location}
+              {pick(experience.location)}
             </span>
           </div>
 
           <h1 className="mt-4 text-2xl font-light leading-tight tracking-tight sm:text-4xl">
-            {experience.title}
+            {pick(experience.title)}
           </h1>
           <p className="mt-2 text-base font-light text-foreground/80 sm:text-lg">
-            {experience.organization}
+            {pick(experience.organization)}
           </p>
           <p className="mt-4 text-lg font-light text-muted-foreground sm:text-xl">
-            {experience.description}
+            {pick(experience.description)}
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15}>
           <div className="flex flex-wrap items-center gap-2">
             <Tag size={14} className="shrink-0 text-muted-foreground" />
-            {experience.tags.map((tag) => (
+            {pick(experience.tags).map((tag) => (
               <span
                 key={tag}
                 className="rounded-md border border-dashed border-border/70 bg-card px-2.5 py-0.5 font-mono text-xs text-muted-foreground"
@@ -70,10 +72,10 @@ const ExperienceDetail = () => {
 
         <FadeIn delay={0.25}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
-            Principais atividades e resultados
+            {t.experience.highlights}
           </h2>
           <ul className="list-disc space-y-3 pl-5 font-light text-muted-foreground">
-            {experience.highlights.map((highlight) => (
+            {pick(experience.highlights).map((highlight) => (
               <li key={highlight}>{highlight}</li>
             ))}
           </ul>

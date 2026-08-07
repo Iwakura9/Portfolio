@@ -2,9 +2,11 @@ import { quotes } from "@/data/quote";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MusicPlayer } from "./MusicPlayer";
+import { useI18n } from "@/i18n/useI18n";
 
 const QuoteSection = () => {
   const [index, setIndex] = useState(0);
+  const { pick } = useI18n();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,7 +41,7 @@ const QuoteSection = () => {
               className="relative w-full pb-6"
             >
               <p className="text-center font-serif text-base italic text-muted-foreground md:text-lg">
-                "{current.text}"
+                "{pick(current.text)}"
               </p>
               {current.author && (
                 <motion.p

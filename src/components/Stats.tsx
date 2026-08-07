@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
+import { useI18n } from "@/i18n/useI18n";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -12,30 +13,41 @@ type ContributionResponse = {
   contributions: Activity[];
 };
 
-const activityDateFormatter = new Intl.DateTimeFormat("pt-BR", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-const formatActivityDate = (date: string) => {
-  const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) {
-    return date;
-  }
-
-  return activityDateFormatter.format(parsed);
-};
-
 const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => {
   const { resolvedTheme } = useTheme();
+  const { t } = useI18n();
   const [data, setData] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Guarda apenas o fato do erro: a mensagem é resolvida no render, para
+  // acompanhar a troca de idioma.
+  const [hasError, setHasError] = useState(false);
   const [year, setYear] = useState<StatsProps["year"]>(initialYear);
   const scrollRef = useRef<HTMLDivElement>(null);
   const currentYear = new Date().getFullYear();
+
+  const activityDateFormatter = useMemo(
+    () =>
+      new Intl.DateTimeFormat(t.stats.dateLocale, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC",
+      }),
+    [t.stats.dateLocale],
+  );
+
+  const formatActivityDate = useCallback(
+    (date: string) => {
+      const parsed = new Date(date);
+      if (Number.isNaN(parsed.getTime())) {
+        return date;
+      }
+
+      return activityDateFormatter.format(parsed);
+    },
+    [activityDateFormatter],
+  );
+
   const yearOptions: number[] = Array.from(
     { length: Math.max(currentYear - 2024 + 1, 1) },
     (_, index) => currentYear - index,
@@ -74,7 +86,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
         if (!active) return;
 
         setLoading(true);
-        setError(null);
+        setHasError(false);
 
         const res = await fetch(
           `https://github-contributions-api.jogruber.de/v4/${site.githubUser}?y=${year}`,
@@ -82,7 +94,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
         );
 
         if (!res.ok) {
-          throw new Error("Não foi possível carregar a atividade do GitHub");
+          throw new Error(`GitHub contributions API respondeu ${res.status}`);
         }
 
         const json = (await res.json()) as ContributionResponse;
@@ -95,9 +107,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
         }
 
         if (active) {
-          setError(
-            err instanceof Error ? err.message : "Ocorreu um erro inesperado",
-          );
+          setHasError(true);
         }
       } finally {
         if (active) {
@@ -120,7 +130,7 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-3">
             <p className="text-2xl font-light tracking-tight sm:text-3xl">
-              Atividade no GitHub
+              {t.stats.title}
             </p>
           </div>
         </div>
@@ -149,11 +159,9 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
 
       <div className="rounded-2xl border border-dashed border-border/80 bg-card p-4 pb-3 sm:p-6 sm:pb-4">
         {loading ? (
-          <p className="text-sm text-muted-foreground">
-            Carregando atividade do GitHub...
-          </p>
-        ) : error ? (
-          <p className="text-sm text-muted-foreground">{error}</p>
+          <p className="text-sm text-muted-foreground">{t.stats.loading}</p>
+        ) : hasError ? (
+          <p className="text-sm text-muted-foreground">{t.stats.loadError}</p>
         ) : (
           <div className="space-y-3">
             <div
@@ -202,7 +210,10 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
                       withArrow: true,
                       offset: { mainAxis: 10 },
                       text: (activity) =>
-                        `${formatActivityDate(activity.date)} • ${activity.count} contribuiç${activity.count === 1 ? "ão" : "ões"}`,
+                        t.stats.activityTooltip(
+                          formatActivityDate(activity.date),
+                          activity.count,
+                        ),
                     },
                   }}
                 />
@@ -210,10 +221,12 @@ const Stats = ({ year: initialYear = new Date().getFullYear() }: StatsProps) => 
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
               <span className="text-xs font-light sm:text-sm">
-                {data.reduce((sum, activity) => sum + activity.count, 0)}{" "}
-                contribuições em {year}
+                {t.stats.contributionsInYear(
+                  data.reduce((sum, activity) => sum + activity.count, 0),
+                  String(year),
+                )}
               </span>
-              <span>Role horizontalmente para visualizar</span>
+              <span>{t.stats.scrollHint}</span>
             </div>
           </div>
         )}

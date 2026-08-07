@@ -1,3 +1,5 @@
+import type { Localized } from "@/i18n/types";
+
 export interface TechItem {
   name: string;
   icon: string;
@@ -58,20 +60,24 @@ export const toolsSkills: TechItem[] = [
   { name: "Codex", icon: "/tech/codex.svg" },
 ];
 
-export const skillRows: { direction: "left" | "right"; category: string; items: TechItem[] }[] = [
+export const skillRows: {
+  direction: "left" | "right";
+  category: Localized<string>;
+  items: TechItem[];
+}[] = [
   {
     direction: "left",
-    category: "Linguagens",
+    category: { pt: "Linguagens", en: "Languages" },
     items: languageSkills,
   },
   {
     direction: "right",
-    category: "Tecnologias",
+    category: { pt: "Tecnologias", en: "Technologies" },
     items: technologySkills,
   },
   {
     direction: "left",
-    category: "Ferramentas",
+    category: { pt: "Ferramentas", en: "Tools" },
     items: toolsSkills,
   },
 ];

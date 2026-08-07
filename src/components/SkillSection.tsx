@@ -3,23 +3,25 @@ import SkillRow from "./helpers/SkillRow";
 import ThemedIcon from "./helpers/ThemedIcon";
 import { skillRows } from "@/data/tech";
 import { LayoutGrid, List } from "lucide-react";
+import { useI18n } from "@/i18n/useI18n";
 
 const SkillSection = () => {
   const [isInline, setIsInline] = useState(false);
+  const { t } = useI18n();
 
   return (
     <section id="skills" className="w-full space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <p className="text-2xl font-light tracking-tight sm:text-3xl">
-            Tecnologias
+            {t.skills.title}
           </p>
         </div>
         <button
           onClick={() => setIsInline(!isInline)}
           className="flex h-8 w-8 items-center justify-center rounded-md border border-dashed border-border/70 bg-card text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-          title={isInline ? "Exibir linhas animadas" : "Exibir em lista"}
-          aria-label="Alternar visualização das tecnologias"
+          title={isInline ? t.skills.showAnimated : t.skills.showList}
+          aria-label={t.skills.toggleView}
         >
           {isInline ? <List size={16} /> : <LayoutGrid size={16} />}
         </button>
@@ -34,7 +36,7 @@ const SkillSection = () => {
                   key={skill.name}
                   className="bg-card inline-flex items-center gap-1.5 rounded-md border border-dashed px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
                 >
-                  <ThemedIcon item={skill} className="h-4 w-4" />
+                  <ThemedIcon item={skill} alt={skill.name} className="h-4 w-4" />
                   {skill.name}
                 </span>
               ))}
