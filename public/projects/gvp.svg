@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#161016"/>
+      <stop offset="1" stop-color="#241c2c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <rect x="150" y="80" width="900" height="515" rx="14" fill="#eef0f4"/>
+  <rect x="150" y="80" width="900" height="46" rx="14" fill="#d8dbe3"/>
+  <rect x="150" y="112" width="900" height="14" fill="#d8dbe3"/>
+  <circle cx="182" cy="103" r="7" fill="#e06c75"/>
+  <circle cx="206" cy="103" r="7" fill="#e5c07b"/>
+  <circle cx="230" cy="103" r="7" fill="#98c379"/>
+  <text x="600" y="109" fill="#475569" font-family="ui-sans-serif, sans-serif" font-size="18" font-weight="700" text-anchor="middle">GVP · Gestor de Vestuário Pessoal</text>
+
+  <rect x="178" y="154" width="200" height="413" rx="10" fill="#dfe2e9"/>
+  <g fill="#8a90a3" font-family="ui-sans-serif, sans-serif" font-size="16">
+    <rect x="200" y="176" width="156" height="34" rx="8" fill="#c9a4e0"/>
+    <text x="212" y="198" fill="#3a2a44" font-weight="700">Armário</text>
+    <rect x="200" y="222" width="156" height="34" rx="8" fill="#eef0f4"/>
+    <text x="212" y="244">Combinações</text>
+    <rect x="200" y="268" width="156" height="34" rx="8" fill="#eef0f4"/>
+    <text x="212" y="290">Categorias</text>
+    <rect x="200" y="314" width="156" height="34" rx="8" fill="#eef0f4"/>
+    <text x="212" y="336">Favoritos</text>
+  </g>
+
+  <g font-family="ui-sans-serif, sans-serif">
+    <text x="410" y="184" fill="#1e293b" font-size="22" font-weight="700">Meu Armário</text>
+    <text x="410" y="208" fill="#64748b" font-size="15">Java · Swing · Windows Desktop App</text>
+  </g>
+
+  <g>
+    <rect x="410" y="232" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <path d="M455 262 l20 -14 20 14 v10 l-14 -6 v58 h-12 v-58 l-14 6 z" fill="#94a3b8"/>
+    <rect x="586" y="232" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="626" y="262" width="70" height="90" rx="8" fill="#a5b4fc"/>
+    <rect x="762" y="232" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <path d="M787 262 h60 v18 l-14 10 v50 h-32 v-50 l-14 -10 z" fill="#fca5a5"/>
+
+    <rect x="410" y="404" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="438" y="440" width="94" height="70" rx="8" fill="#86efac"/>
+    <rect x="586" y="404" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="614" y="434" width="94" height="30" rx="6" fill="#fcd34d"/>
+    <rect x="626" y="470" width="70" height="52" rx="6" fill="#fcd34d"/>
+    <rect x="762" y="404" width="150" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+    <text x="837" y="486" fill="#94a3b8" font-family="ui-sans-serif, sans-serif" font-size="42" text-anchor="middle">+</text>
+  </g>
+</svg>

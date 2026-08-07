@@ -11,7 +11,7 @@ export interface Project {
   techStack: TechItem[];
   liveLink?: string;
   liveLabel?: Localized<string>;
-  githubLink: string;
+  githubLink?: string;
   about: Localized<string>;
   features: Localized<string[]>;
 }
@@ -171,6 +171,36 @@ export const projects: Project[] = [
       projectTech.supabase,
     ],
     githubLink: "https://github.com/Iwakura9/Portfolio",
+  },
+  {
+    slug: "gvp",
+    name: { pt: "GVP", en: "GVP" },
+    imgSrc: "/projects/gvp.svg",
+    description: {
+      pt: "Gestor de Vestuário Pessoal: aplicação gráfica desktop para Windows, feita sozinho para a disciplina de Técnicas de Programação I da UFC.",
+      en: "Personal Wardrobe Manager: a desktop GUI application for Windows, built solo for the Programming Techniques I course at UFC.",
+    },
+    about: {
+      pt: "GVP (Gestor de Vestuário Pessoal) é uma aplicação gráfica desktop desenvolvida individualmente como projeto da disciplina de Técnicas de Programação I da UFC. O objetivo do trabalho era demonstrar, na prática, os conceitos de Programação Orientada a Objetos vistos na disciplina — classes, encapsulamento, herança e composição — aplicados a um sistema real em Java, com múltiplas janelas e telas de interação em vez de uma interface de linha de comando.",
+      en: "GVP (Personal Wardrobe Manager) is a desktop GUI application built individually as the final project for the Programming Techniques I course at UFC. The goal was to put into practice the Object-Oriented Programming concepts covered in the course — classes, encapsulation, inheritance and composition — applied to a real Java system with multiple windows and interactive screens instead of a command-line interface.",
+    },
+    features: {
+      pt: [
+        "Aplicação gráfica desktop nativa para Windows",
+        "Múltiplas janelas e telas de interação",
+        "Modelagem orientada a objetos do domínio (peças de roupa, categorias, combinações)",
+        "Desenvolvido individualmente do início ao fim",
+        "Projeto final da disciplina de Técnicas de Programação I (UFC)",
+      ],
+      en: [
+        "Native desktop GUI application for Windows",
+        "Multiple windows and interactive screens",
+        "Object-oriented modeling of the domain (clothing items, categories, outfits)",
+        "Built individually from start to finish",
+        "Final project for the Programming Techniques I course (UFC)",
+      ],
+    },
+    techStack: [projectTech.java],
   },
 ];
 
